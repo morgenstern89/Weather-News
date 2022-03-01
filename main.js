@@ -33,12 +33,12 @@ let weather = {
  };
 
  document.querySelector(".search-button").addEventListener("click", function (){
- weather.search(); searchNewsByKeyword();
+ weather.search(); searchNewsByKeyword(); searchNewsAnyKeyword();
  });
  
  document.querySelector(".searchbar").addEventListener("keyup", function(event){
    if(event.key == "Enter"){
-       weather.search(); searchNewsByKeyword();
+       weather.search(); searchNewsByKeyword(); searchNewsAnyKeyword();
    }
  });
  weather.fetchWeather("Germany");
@@ -73,7 +73,15 @@ const displayNews = async()=>{
   displayNews();
 }; 
  
+
+const searchNewsAnyKeyword =async()=>{
+  let keyword = document.querySelector(".searchbar").value;
+  page=1;
+  url=new URL(`https://api.newscatcherapi.com/v2/search?q=${keyword}&page_size=10`);
+  displayNews();
+}; 
  
+
 const render = ()=> {
   let newsHTML="";
   newsHTML= articles.map((news)=>{
